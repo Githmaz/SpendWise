@@ -37,7 +37,7 @@ class ParallelogramButton extends StatelessWidget {
             ),
           ),
           child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
+            padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 0),
             child: Text(
               label,
               textAlign: TextAlign.center,
@@ -65,7 +65,8 @@ class ParallelogramClipper extends CustomClipper<Path> {
       'left-parallelogram': [0, width * 0.9, width, width * 0.1],
       'right-parallelogram': [width * 0.1, width, width * 0.9, 0],
       'left-trapezoid': [0, width * 0.9, width, 0],
-      'right-trapezoid': [width * 0.1, width, width, 0],
+      'bottom-right-trapezoid': [width * 0.1, width, width, 0],
+      'top-right-trapezoid': [0 , width, width, width*0.1],
       'Square': [0, width, width, 0]
     };
 

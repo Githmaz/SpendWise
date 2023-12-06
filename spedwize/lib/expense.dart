@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:spedwize/models/expense.dart';
 import 'package:spedwize/util.dart';
 import 'package:spedwize/widgets/expense_list.dart';
-import 'package:spedwize/widgets/new_expense.dart';
+import 'package:spedwize/widgets/add_expense_card.dart';
 
 const filePath = 'assets/expense_data.json';
 
@@ -41,7 +41,7 @@ class _ExpensesState extends State<Expenses> {
     // #TODO - Add show bottom model
     showModalBottomSheet(
         context: context,
-        builder: (ctx) => NewExpense(onAddExpense: addExpense));
+        builder: (ctx) => AddExpense(onAddExpense: addExpense));
   }
 
   // #TODO - addExpense function to expense List and pass to NewExpense widget;

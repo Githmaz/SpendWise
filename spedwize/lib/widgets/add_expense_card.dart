@@ -2,20 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:spedwize/models/expense.dart';
+import 'package:spedwize/widgets/parallelogram_button.dart';
 
-class NewExpense extends StatefulWidget {
-  const NewExpense({super.key, required this.onAddExpense});
+class AddExpense extends StatefulWidget {
+  const AddExpense({super.key, required this.onAddExpense});
 
   final void Function(Expense expense) onAddExpense;
 
   @override
-  State<NewExpense> createState() {
+  State<AddExpense> createState() {
     return _NewExpenseState();
   }
 }
 
-class _NewExpenseState extends State<NewExpense> {
-  // #TODO - onChange function
+class _NewExpenseState extends State<AddExpense> {
   final titleController = TextEditingController();
   final amountController = TextEditingController();
   DateTime? _selectedDate;
@@ -23,11 +23,6 @@ class _NewExpenseState extends State<NewExpense> {
 
   final formatter = DateFormat.yMd();
 
-  // #TODO - titileController & _amountController with TextEditingController
-  // #TODO - selectedCategory
-  // #TODO - selectedDate
-
-  // #TODO - dispose
   @override
   void dispose() {
     titleController.dispose();
@@ -38,7 +33,7 @@ class _NewExpenseState extends State<NewExpense> {
   _showDateTimePicker() async {
     final now = DateTime.now();
 
-    final firstdate = DateTime(now.year - 1, now.month - 1, now.day);
+    final firstdate = DateTime(now.year - 1, now.month - 12, now.day);
     var _pickedDate = await showDatePicker(
         context: context,
         initialDate: now,
@@ -49,13 +44,7 @@ class _NewExpenseState extends State<NewExpense> {
     });
   }
 
-  _onSubmit(){
-    
-  }
-
-  // #TODO - showDatePicker Function
-
-  // #TODO - onSubmit Function with validations
+  _onSubmit() {}
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +66,8 @@ class _NewExpenseState extends State<NewExpense> {
             maxLength: 50,
             decoration: const InputDecoration(
               border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(10))),
+                borderRadius: BorderRadius.all(Radius.circular(10)),
+              ),
               label: Text('Title'),
             ),
           ),
@@ -88,21 +78,18 @@ class _NewExpenseState extends State<NewExpense> {
             maxLength: 50,
             decoration: const InputDecoration(
               border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(10))),
+                borderRadius: BorderRadius.all(Radius.circular(10)),
+              ),
               prefixText: "LKR .",
               label: Text('Amount'),
             ),
           ),
-          // #TODO - Amount with keyboardType: TextInputType.number
-          // #TODO - Date Picker Selection Icon Button with a Text
-          // #TODO - Category Dropdown
           DropdownButton<Category>(
             value: _selectedCategory,
             items: Category.values.map((category) {
               return DropdownMenuItem<Category>(
                 value: category,
-                child: Text(category
-                    .name),
+                child: Text(category.name),
               );
             }).toList(),
             onChanged: (Category? value) {
@@ -121,29 +108,44 @@ class _NewExpenseState extends State<NewExpense> {
                   icon: const Icon(Icons.calendar_month_outlined))
             ],
           ),
-          Row(
-            // #TDOD - Add Cancel TextButton with Navigator.pop(context)
-            children: [
-              ElevatedButton(
-                onPressed: () {
-                  print("Title ${titleController.text}");
-                  print("Title ${amountController.text}");
-                  print("Title ${_selectedCategory.toString()}");
-                },
-                child: const Text('Cancel'),
-              ),
-              const SizedBox(
-                width: 20,
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  print("Title ${titleController.text}");
-                  print("Title ${amountController.text}");
-                },
-                child: const Text('Save Expense'),
-              ),
-            ],
-          ),
+         Row(
+  mainAxisAlignment: MainAxisAlignment.spaceBetween, // Add this line
+  children: [
+    ParallelogramButton(
+      label: "Cancel",
+      onPressed: () {
+        dispose();
+        Navigator.pop(context);
+      },
+      shape: "left-trapezoid",
+      width: MediaQuery.of(context).size.width * 0.3,
+      buttonColor: Colors.blue,
+      fontSize: 12,
+    ),const SizedBox(),
+    ParallelogramButton(
+      label: "Cancel",
+      onPressed: () {
+        dispose();
+        Navigator.pop(context);
+      },
+      shape: "left-parallelogram",
+      width: MediaQuery.of(context).size.width * 0.3,
+      buttonColor: Colors.blue,
+      fontSize: 12,
+    ),
+    ParallelogramButton(
+      label: "Cancel",
+      onPressed: () {
+        dispose();
+        Navigator.pop(context);
+      },
+      shape: "top-right-trapezoid",
+      width: MediaQuery.of(context).size.width * 0.3,
+      buttonColor: Colors.blue,
+      fontSize: 12,
+    ),
+  ],
+),
         ],
       ),
     );

@@ -12,14 +12,6 @@ class ExpensesList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // return Column(
-    //   children: [...expenses.map((e) => ExpenseItem(e))],
-    // );
-
-    // #TODO - Try with ListView then
-    // return ListView(children: [...expenses.map((e) => ExpenseItem(e))],);
-
-    // #TODO - Add ListView.builder
     return ListView.builder(
         itemCount: expenses.length,
         itemBuilder: (context, index) => ExpenseItem(expenses[index]));
